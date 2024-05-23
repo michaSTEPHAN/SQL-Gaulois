@@ -1,9 +1,3 @@
-Page 1 sur 1 ELAN / SQL Gaulois / 07_2021 / Version 2.0
-ELAN
-14 rue du Rhône
-67100 STRASBOURG
-TEL : 03.88.30.78.30
-www.elan-formation.fr
 A partir du script SQL Gaulois fourni par votre formateur, écrivez et exécutez les requêtes SQL suivantes :
 1. Nom des lieux qui finissent par 'um'.
 2. Nombre de personnages par lieu (trié par nombre de personnages décroissant).
