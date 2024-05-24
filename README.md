@@ -1,4 +1,5 @@
 A partir du script SQL Gaulois fourni par votre formateur, écrivez et exécutez les requêtes SQL suivantes :
+
 1. Nom des lieux qui finissent par 'um'.
 2. Nombre de personnages par lieu (trié par nombre de personnages décroissant).
 3. Nom des personnages + spécialité + adresse et lieu d'habitation, triés par lieu puis par nom de personnage.
@@ -17,6 +18,7 @@ A partir du script SQL Gaulois fourni par votre formateur, écrivez et exécutez
 
 
 En écrivant toujours des requêtes SQL, modifiez la base de données comme suit :
+
 A. Ajoutez le personnage suivant : Champdeblix, agriculteur résidant à la ferme Hantassion de Rotomagus.
 B. Autorisez Bonemine à boire de la potion magique, elle est jalouse d'Iélosubmarine...
 C. Supprimez les casques grecs qui n'ont jamais été pris lors d'une bataille.
