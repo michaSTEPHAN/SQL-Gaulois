@@ -14,7 +14,8 @@ A partir du script SQL Gaulois fourni par votre formateur, écrivez et exécutez
 13. Nom du / des lieu(x) possédant le plus d'habitants, en dehors du village gaulois.
 14. Nom des personnages qui n'ont jamais bu aucune potion.
 15. Nom du / des personnages qui n'ont pas le droit de boire de la potion 'Magique'.
-_______________________________________________________________________________
+
+
 En écrivant toujours des requêtes SQL, modifiez la base de données comme suit :
 A. Ajoutez le personnage suivant : Champdeblix, agriculteur résidant à la ferme Hantassion de Rotomagus.
 B. Autorisez Bonemine à boire de la potion magique, elle est jalouse d'Iélosubmarine...
