@@ -19,9 +19,9 @@ A partir du script SQL Gaulois fourni par votre formateur, écrivez et exécutez
 
 En écrivant toujours des requêtes SQL, modifiez la base de données comme suit :
 
-A. Ajoutez le personnage suivant : Champdeblix, agriculteur résidant à la ferme Hantassion de Rotomagus.
-B. Autorisez Bonemine à boire de la potion magique, elle est jalouse d'Iélosubmarine...
-C. Supprimez les casques grecs qui n'ont jamais été pris lors d'une bataille.
-D. Modifiez l'adresse de Zérozérosix : il a été mis en prison à Condate.
-E. La potion 'Soupe' ne doit plus contenir de persil.
-F. Obélix s'est trompé : ce sont 42 casques Weisenau, et non Ostrogoths
+A. Ajoutez le personnage suivant : Champdeblix, agriculteur résidant à la ferme Hantassion de Rotomagus. 
+B. Autorisez Bonemine à boire de la potion magique, elle est jalouse d'Iélosubmarine... 
+C. Supprimez les casques grecs qui n'ont jamais été pris lors d'une bataille. 
+D. Modifiez l'adresse de Zérozérosix : il a été mis en prison à Condate. 
+E. La potion 'Soupe' ne doit plus contenir de persil. 
+F. Obélix s'est trompé : ce sont 42 casques Weisenau, et non Ostrogoths.
