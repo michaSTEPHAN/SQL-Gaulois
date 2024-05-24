@@ -22,7 +22,7 @@ ORDER BY nbHabitants DESC
 SELECT DISTINCT nom_personnage, nom_specialite, adresse_personnage, nom_lieu
 FROM personnage, lieu, specialite
 WHERE personnage.id_lieu = lieu.id_lieu
-AND personnage.id_specialite = specialite.id_specialite
+  AND personnage.id_specialite = specialite.id_specialite
 ORDER BY nom_lieu, nom_personnage
 ;
 
@@ -55,7 +55,7 @@ ORDER BY dateBataille desc
 SELECT distinct nom_potion, SUM(composer.qte * ingredient.cout_ingredient) as coutPotion
 FROM potion, ingredient, composer
 WHERE potion.id_potion = composer.id_potion
-AND ingredient.id_ingredient = composer.id_ingredient
+  AND ingredient.id_ingredient = composer.id_ingredient
 GROUP BY nom_potion
 ORDER BY coutPotion DESC 
 ;
@@ -67,8 +67,8 @@ ORDER BY coutPotion DESC
 SELECT nom_ingredient, composer.qte, cout_ingredient, (composer.qte * cout_ingredient) as coutIngredient
 FROM potion, ingredient, composer
 WHERE potion.id_potion = composer.id_potion
-AND  ingredient.id_ingredient = composer.id_ingredient
-AND nom_potion = 'Santé'
+  AND ingredient.id_ingredient = composer.id_ingredient
+  AND nom_potion = 'Santé'
 ;
 
 ---------------------------------------------------------------------------------------------------------------------
@@ -78,17 +78,32 @@ AND nom_potion = 'Santé'
 SELECT nom_personnage, sum(qte) as qteCasquePris
 FROM personnage, casque, bataille, prendre_casque
 WHERE prendre_casque.id_personnage = personnage.id_personnage
-AND prendre_casque.id_bataille = bataille.id_bataille
-AND prendre_casque.id_casque = casque.id_casque
-AND nom_bataille = 'Bataille du village gaulois'
+  AND prendre_casque.id_bataille = bataille.id_bataille
+  AND prendre_casque.id_casque = casque.id_casque
+  AND nom_bataille = 'Bataille du village gaulois'
 GROUP BY nom_personnage
 HAVING qteCasquePris >= ALL (
-		SELECT SUM(qte)
-		FROM prendre_casque, bataille
-		WHERE prendre_casque.id_bataille = bataille.id_bataille
-		AND nom_bataille = 'Bataille du village gaulois'
-		GROUP BY id_personnage
-		)
+	SELECT SUM(qte)
+	FROM prendre_casque, bataille
+	WHERE prendre_casque.id_bataille = bataille.id_bataille
+	AND nom_bataille = 'Bataille du village gaulois'
+	GROUP BY id_personnage
+	)
+;
+
+
+CREATE VIEW table_tempo AS
+SELECT nom_personnage, sum(qte) as qteCasquePris
+FROM personnage, casque, bataille, prendre_casque
+WHERE prendre_casque.id_personnage = personnage.id_personnage
+  AND prendre_casque.id_bataille = bataille.id_bataille 
+  AND prendre_casque.id_casque = casque.id_casque
+  AND nom_bataille = 'Bataille du village gaulois'
+GROUP BY nom_personnage
+;
+
+SELECT nom_personnage, MAX(qteCasquePris)
+FROM table_tempo
 ;
 
 ---------------------------------------------------------------------------------------------------------------------
@@ -111,10 +126,10 @@ FROM bataille, prendre_casque
 WHERE prendre_casque.id_bataille = bataille.id_bataille
 GROUP BY nom_bataille
 HAVING qteCasquePris >= ALL (
-		SELECT SUM(qte)
-		FROM prendre_casque
-		GROUP BY id_bataille
-		)
+	SELECT SUM(qte)
+	FROM prendre_casque
+	GROUP BY id_bataille
+	)
 ;
 
 ---------------------------------------------------------------------------------------------------------------------
@@ -124,7 +139,7 @@ HAVING qteCasquePris >= ALL (
 SELECT DISTINCT nom_type_casque, COUNT(nom_casque) as nbCasques, SUM(cout_casque) AS coutTotal
 FROM casque, type_casque, prendre_casque
 WHERE prendre_casque.id_casque = casque.id_casque
-AND casque.id_type_casque = type_casque.id_type_casque
+  AND casque.id_type_casque = type_casque.id_type_casque
 GROUP BY nom_type_casque
 ORDER BY nbCasques DESC 
 ;
@@ -135,8 +150,8 @@ ORDER BY nbCasques DESC
 SELECT DISTINCT nom_potion
 FROM potion, composer, ingredient
 WHERE composer.id_ingredient = ingredient.id_ingredient
-AND composer.id_potion = potion.id_potion
-AND nom_ingredient = 'Poisson frais'
+  AND composer.id_potion = potion.id_potion
+  AND nom_ingredient = 'Poisson frais'
 ;
 
 ---------------------------------------------------------------------------------------------------------------------
@@ -146,15 +161,15 @@ AND nom_ingredient = 'Poisson frais'
 SELECT nom_lieu, COUNT(nom_personnage) AS habitants
 FROM lieu, personnage
 WHERE lieu.id_lieu = personnage.id_lieu
-AND nom_lieu <> 'Village gaulois'
+  AND nom_lieu <> 'Village gaulois'
 GROUP BY nom_lieu
 HAVING habitants >= ALL (
-		SELECT COUNT(nom_personnage)
-		FROM lieu, personnage
-		WHERE lieu.id_lieu = personnage.id_lieu
-		AND nom_lieu <> 'Village gaulois'
-		GROUP BY nom_lieu
-		)
+	SELECT COUNT(nom_personnage)
+	FROM lieu, personnage
+	WHERE lieu.id_lieu = personnage.id_lieu
+	AND nom_lieu <> 'Village gaulois'
+	GROUP BY nom_lieu
+	)
 ;
 
 ---------------------------------------------------------------------------------------------------------------------
@@ -162,9 +177,9 @@ HAVING habitants >= ALL (
 14. Nom des personnages qui n'ont jamais bu aucune potion.
 
 SELECT nom_personnage 
-	FROM personnage
-	LEFT JOIN boire ON boire.id_personnage = personnage.id_personnage
-	WHERE boire.id_personnage IS NULL
+FROM personnage
+LEFT JOIN boire ON boire.id_personnage = personnage.id_personnage
+WHERE boire.id_personnage IS NULL
 ;
 
 ---------------------------------------------------------------------------------------------------------------------
@@ -178,8 +193,8 @@ WHERE personnage.id_personnage NOT IN
 	SELECT personnage.id_personnage
 	FROM personnage, potion, autoriser_boire
 	WHERE autoriser_boire.id_potion = potion.id_potion
-	AND autoriser_boire.id_personnage = personnage.id_personnage
-	AND potion.nom_potion = 'Magique'
+	  AND autoriser_boire.id_personnage = personnage.id_personnage
+	  AND potion.nom_potion = 'Magique'
 )
 ;
 
@@ -187,60 +202,61 @@ WHERE personnage.id_personnage NOT IN
 
 A. Ajoutez le personnage suivant : Champdeblix, agriculteur résidant à la ferme Hantassion de Rotomagus.
 
-insert into personnage
-values (45,'Champdeblix','ferme Hantassion', 'indisponible.jpg',6,12)
+INSERT INTO personnage
+VALUES (45,'Champdeblix','ferme Hantassion', 'indisponible.jpg',
+       (SELECT id_lieu FROM lieu WHERE nom_lieu='Rotomagus'), 
+       (SELECT id_specialite FROM specialite WHERE nom_specialite='Agriculteur'))
 ;
-COMMIT;
 
 ---------------------------------------------------------------------------------------------------------------------
 
 B. Autorisez Bonemine à boire de la potion magique, elle est jalouse d'Iélosubmarine...
 
-INSERT INTO autoriser_boire VALUES (1, 12);
-COMMIT;
+INSERT INTO autoriser_boire 
+VALUES ((SELECT id_potion FROM potion WHERE nom_potion='Magique'), 
+        (SELECT id_personnage FROM personnage WHERE nom_personnage='Bonemine'));
 
 ---------------------------------------------------------------------------------------------------------------------
 
 C. Supprimez les casques grecs qui n'ont jamais été pris lors d'une bataille.
 
-DELETE FROM CASQUE 
-WHERE id_type_casque = 2
+DELETE FROM casque
+WHERE id_type_casque = (SELECT id_type_casque FROM type_casque WHERE nom_type_casque = 'Grec')
 AND id_casque NOT IN (
 	SELECT prendre_casque.id_casque FROM prendre_casque
 )
 ;
-COMMIT;
+
 
 ---------------------------------------------------------------------------------------------------------------------
 
 D. Modifiez l'adresse de Zérozérosix : il a été mis en prison à Condate.
 
 UPDATE personnage
-SET adresse_personnage = "Prison", id_lieu = 9
-WHERE personnage.id_personnage = 23
+SET adresse_personnage = 'Prison', 
+    id_lieu = (SELECT id_lieu FROM lieu WHERE nom_lieu = 'Condate')
+WHERE id_personnage = 23
 ;
-COMMIT;
 
 ---------------------------------------------------------------------------------------------------------------------
 
 E. La potion 'Soupe' ne doit plus contenir de persil.
 
 DELETE FROM composer
-WHERE id_potion = 9 
-AND id_ingredient = 19;
-COMMIT;
+WHERE id_potion = (SELECT id_potion FROM potion WHERE nom_potion='Soupe')
+  AND id_ingredient = (SELECT id_ingredient FROM ingredient WHERE nom_ingredient = 'Persil')
+;
 
 ---------------------------------------------------------------------------------------------------------------------
 
 F. Obélix s'est trompé : ce sont 42 casques Weisenau, et non Ostrogoths, qu'il a pris lors de la bataille 'Attaque de la banque postale'. Corrigez son erreur !
 
 UPDATE prendre_casque
-SET id_casque = 10
-, qte = 42
+SET id_casque = (SELECT id_casque FROM casque WHERE nom_casque = 'Weisenau'),
+    qte = 42
 WHERE id_bataille = 9
-AND id_personnage = 5
-AND id_casque = 14
+  AND id_personnage = 5
+  AND id_casque = 14
 ;
-COMMIT;
 
 ---------------------------------------------------------------------------------------------------------------------
